@@ -5,6 +5,7 @@ import {NextFont} from "next/dist/compiled/@next/font";
 import { ClerkProvider } from '@clerk/nextjs';
 import ThemesProvider from "@/providers/theme-provider";
 import {cn} from "@/lib/utils";
+import { dark } from '@clerk/themes';
 
 const nextFont: NextFont = Open_Sans({ subsets: ['latin'] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+        appearance={{baseTheme: dark}}
+    >
         <html lang="en">
         <ThemesProvider>
             <body className={cn("transition-colors", nextFont.className)}>
