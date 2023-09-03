@@ -4,7 +4,7 @@ import ThemeSwitcher from "@/components/theme-switcher";
 
 const HomePage: NextPage = () => {
     return (
-        <div>
+        <div className="flex gap-x-4">
             <h1>Discord</h1>
             <UserButton afterSignOutUrl="/"/>
             <ThemeSwitcher/>
