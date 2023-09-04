@@ -25,7 +25,7 @@ export default function RootLayout({
     >
         <html lang="en">
         <ThemesProvider>
-            <body className={cn("transition-colors", nextFont.className)}>
+            <body className={cn("transition-colors bg-white dark:bg-neutral-700", nextFont.className)}>
             {children}
             </body>
         </ThemesProvider>
