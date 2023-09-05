@@ -15,7 +15,7 @@ const ThemesProvider = ({children}: {children: React.ReactNode}) => {
     }
 
     return (
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" storageKey="discord-theme" defaultTheme="dark" enableSystem={false}>
             {children}
         </ThemeProvider>
     );
