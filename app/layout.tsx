@@ -6,6 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import ThemesProvider from "@/providers/theme-provider";
 import {cn} from "@/lib/utils";
 import { dark } from '@clerk/themes';
+import ModalProvider from "@/providers/modal-provider";
 
 const nextFont: NextFont = Open_Sans({ subsets: ['latin'] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
         <html lang="en">
         <ThemesProvider>
             <body className={cn("transition-colors bg-white dark:bg-neutral-700", nextFont.className)}>
+            <ModalProvider />
             {children}
             </body>
         </ThemesProvider>
