@@ -12,6 +12,30 @@ body,
   display: none;
 }
 
+.scrollbar-thin::-webkit-scrollbar {
+  @apply w-0 h-2
+}
+
+.scrollbar-track-gray-200::-webkit-scrollbar-track {
+  @apply bg-gray-200
+}
+
+.scrollbar-thumb-dark-gray-400::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full border-2 border-gray-400
+
+}
+
+.scrollbar-hover-black::-webkit-scrollbar-thumb:hover {
+  @apply bg-black
+}
+
+div[data-state="ready"] {
+  width: auto;
+  height: 100px;
+  border-style: solid;
+  border-width: 5px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
