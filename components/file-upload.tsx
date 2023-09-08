@@ -9,7 +9,7 @@ import {FC} from "react";
 interface FileUploadProps {
     onChange: (url?: string) => void;
     value: string;
-    endpoint: "messageFile" | "serverImage"
+    endpoint: "messageFile" | "serverImage";
 }
 
 const FileUpload: FC<FileUploadProps> = ({onChange, value, endpoint}) => {
