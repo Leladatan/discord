@@ -20,8 +20,8 @@ interface ServerHeader {
 }
 
 const ServerHeader: FC<ServerHeader> = ({server, role}) => {
-    const isAdmin = role === MemberRole.ADMIN;
-    const isModerator = isAdmin || role === MemberRole.MODERATOR;
+    const isAdmin: boolean = role === MemberRole.ADMIN;
+    const isModerator: boolean = isAdmin || role === MemberRole.MODERATOR;
 
     return (
         <>
