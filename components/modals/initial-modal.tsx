@@ -16,14 +16,21 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import FileUpload from "@/components/file-upload";
+import axios from "axios";
+import {useRouter} from "next/navigation";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
+import {Separator} from "@/components/ui/separator";
 
 const formSchema = z.object({
     name: z.string().min(1, {message: "Server name is required!"}),
     imageUrl: z.string().min(1, {message: "Server image is required!"}),
+    bannerUrl: z.string(),
 });
 
 const InitialModal: FC = () => {
     const [isMounted, setIsMounted] = useState<boolean>(false);
+
+    const router: AppRouterInstance = useRouter();
 
     useEffect((): void => {
         setIsMounted(true);
@@ -34,13 +41,22 @@ const InitialModal: FC = () => {
         defaultValues: {
             name: "",
             imageUrl: "",
+            bannerUrl: ""
         }
     });
 
     const isSubmitting: boolean = form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>): Promise<void> => {
-        console.log(values);
+        try {
+            await axios.post("/api/servers", values);
+
+            form.reset();
+            router.refresh();
+            window.location.reload();
+        }   catch (e) {
+            console.log(e)
+        }
     };
 
     if (!isMounted) {
@@ -49,12 +65,12 @@ const InitialModal: FC = () => {
 
     return (
         <Dialog open>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden">
+            <DialogContent className="bg-white text-black p-0 overflow-hidden overflow-y-auto h-full scrollbar-thin">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Customize your server
                     </DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="text-center">
                         Give your server a personality with a name and an image. You can always change it later.
                     </DialogDescription>
                 </DialogHeader>
@@ -64,7 +80,10 @@ const InitialModal: FC = () => {
                         onSubmit={form.handleSubmit(onSubmit)}
                     >
                         <div className="space-y-8 px-6">
-                            <div className="flex items-center justify-center text-center">
+                            <div className="flex flex-col items-center justify-center text-center">
+                                <h2 className="text-xl font-bold text-zinc-500 dark:text-white">
+                                    Server Avatar
+                                </h2>
                                 <FormField
                                     control={form.control}
                                     name="imageUrl"
@@ -80,6 +99,29 @@ const InitialModal: FC = () => {
                                         </FormItem>
                                     )}
                                 />
+
+                                <Separator className="h-[3px] bg-zinc-500 dark:bg-zinc-700 rounded-md w-full mx-5 my-2"/>
+
+                                <div className="flex flex-col items-center justify-center text-center">
+                                    <h2 className="text-xl font-bold text-zinc-500 dark:text-white">
+                                        Server Banner
+                                    </h2>
+                                    <FormField
+                                        control={form.control}
+                                        name="bannerUrl"
+                                        render={({field}) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <FileUpload
+                                                        endpoint="serverImage"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
                             </div>
 
                             <FormField
