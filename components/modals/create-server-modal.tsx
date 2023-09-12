@@ -21,6 +21,7 @@ import {useRouter} from "next/navigation";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
 import {useModal} from "@/hooks/use-modal-store";
 import {Separator} from "@/components/ui/separator";
+import {Label} from "@/components/ui/label";
 
 const formSchema = z.object({
     name: z.string().min(1, {message: "Server name is required!"}),
@@ -64,7 +65,7 @@ const CreateServerModal: FC = () => {
 
     return (
         <Dialog open={isOpenModal} onOpenChange={handleClose}>
-            <DialogContent className="bg-neutral-800 text-white p-0 overflow-hidden overflow-y-auto scrollbar-thin">
+            <DialogContent className="bg-neutral-800 text-white p-0 overflow-hidden overflow-y-auto scrollbar-thin h-full md:h-auto">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Customize your server
@@ -80,9 +81,9 @@ const CreateServerModal: FC = () => {
                     >
                         <div className="space-y-8 px-6">
                             <div className="flex flex-col items-center justify-center text-center mb-3">
-                                <p className="text-xl font-bold text-zinc-500 dark:text-white">
+                                <Label className="text-xl font-bold text-zinc-500 dark:text-white">
                                     Server Avatar
-                                </p>
+                                </Label>
                                 <FormField
                                     control={form.control}
                                     name="imageUrl"
@@ -100,12 +101,12 @@ const CreateServerModal: FC = () => {
                                 />
                             </div>
 
-                            <Separator className="h-[1px] bg-zinc-500 dark:bg-zinc-700 rounded-md w-full mx-5 my-3"/>
+                            <Separator className="h-[1px] bg-zinc-500 dark:bg-zinc-700 rounded-md w-full mx-auto my-3"/>
 
                             <div className="flex flex-col items-center justify-center text-center mt-3">
-                                <p className="text-xl font-bold text-zinc-500 dark:text-white">
+                                <Label className="text-xl font-bold text-zinc-500 dark:text-white">
                                     Server Banner
-                                </p>
+                                </Label>
                                 <FormField
                                     control={form.control}
                                     name="bannerUrl"
@@ -113,7 +114,7 @@ const CreateServerModal: FC = () => {
                                         <FormItem>
                                             <FormControl>
                                                 <FileUpload
-                                                    endpoint="serverImage"
+                                                    endpoint="bannerImage"
                                                     value={field.value}
                                                     onChange={field.onChange}
                                                 />
