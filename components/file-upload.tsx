@@ -5,11 +5,12 @@ import Image from "next/image";
 import "@uploadthing/react/styles.css";
 import {UploadDropzone} from "@/utils/uploadthings";
 import {FC} from "react";
+import {cn} from "@/lib/utils";
 
 interface FileUploadProps {
     onChange: (url?: string) => void;
     value: string;
-    endpoint: "messageFile" | "serverImage";
+    endpoint: "messageFile" | "serverImage" | "bannerImage";
 }
 
 const FileUpload: FC<FileUploadProps> = ({onChange, value, endpoint}) => {
@@ -17,12 +18,12 @@ const FileUpload: FC<FileUploadProps> = ({onChange, value, endpoint}) => {
 
     if (value && fileType !== "pdf") {
         return (
-            <div className="relative h-20 w-20">
+            <div className={cn("relative", endpoint === "bannerImage" ? "h-20 w-60" : "h-20 w-20")}>
                 <Image
                     fill
                     src={value}
                     alt="Upload"
-                    className="rounded-full object-center object-cover"
+                    className={cn("object-center object-cover", endpoint === "bannerImage" ? "rounded": "rounded-full")}
                     priority
                 />
                 <button
