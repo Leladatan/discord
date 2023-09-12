@@ -20,6 +20,7 @@ import axios from "axios";
 import {useRouter} from "next/navigation";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
 import {Separator} from "@/components/ui/separator";
+import {Label} from "@/components/ui/label";
 
 const formSchema = z.object({
     name: z.string().min(1, {message: "Server name is required!"}),
@@ -65,7 +66,7 @@ const InitialModal: FC = () => {
 
     return (
         <Dialog open>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden overflow-y-auto h-full scrollbar-thin">
+            <DialogContent className="bg-neutral-800 text-white p-0">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Customize your server
@@ -80,10 +81,10 @@ const InitialModal: FC = () => {
                         onSubmit={form.handleSubmit(onSubmit)}
                     >
                         <div className="space-y-8 px-6">
-                            <div className="flex flex-col items-center justify-center text-center">
-                                <h2 className="text-xl font-bold text-zinc-500 dark:text-white">
+                            <div className="flex flex-col items-center justify-center text-center mb-3">
+                                <Label className="text-xl font-bold text-zinc-500 dark:text-white">
                                     Server Avatar
-                                </h2>
+                                </Label>
                                 <FormField
                                     control={form.control}
                                     name="imageUrl"
@@ -99,29 +100,29 @@ const InitialModal: FC = () => {
                                         </FormItem>
                                     )}
                                 />
+                            </div>
 
-                                <Separator className="h-[3px] bg-zinc-500 dark:bg-zinc-700 rounded-md w-full mx-5 my-2"/>
+                            <Separator className="h-[1px] bg-zinc-500 dark:bg-zinc-700 rounded-md w-full mx-auto my-3"/>
 
-                                <div className="flex flex-col items-center justify-center text-center">
-                                    <h2 className="text-xl font-bold text-zinc-500 dark:text-white">
-                                        Server Banner
-                                    </h2>
-                                    <FormField
-                                        control={form.control}
-                                        name="bannerUrl"
-                                        render={({field}) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <FileUpload
-                                                        endpoint="serverImage"
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
+                            <div className="flex flex-col items-center justify-center text-center mt-3">
+                                <Label className="text-xl font-bold text-zinc-500 dark:text-white">
+                                    Server Banner
+                                </Label>
+                                <FormField
+                                    control={form.control}
+                                    name="bannerUrl"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <FileUpload
+                                                    endpoint="bannerImage"
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
 
                             <FormField
@@ -130,13 +131,13 @@ const InitialModal: FC = () => {
                                 render={({field}) => (
                                     <FormItem>
                                         <FormLabel
-                                            className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                            className="uppercase text-xs font-bold text-zinc-500 dark:text-white"
                                         >
                                             Server name
                                         </FormLabel>
                                         <FormControl>
                                             <Input disabled={isSubmitting}
-                                                   className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black
+                                                   className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-white
                                                     focus-visible:ring-offset-0"
                                                    placeholder="Enter server name"
                                                    {...field}
@@ -147,7 +148,7 @@ const InitialModal: FC = () => {
                                 )}
                             />
                         </div>
-                        <DialogFooter className="bg-gray-100 px-6 py-4">
+                        <DialogFooter className="bg-gray-600 px-6 py-4">
                             <Button disabled={isSubmitting} variant="primary">
                                 Create
                             </Button>
