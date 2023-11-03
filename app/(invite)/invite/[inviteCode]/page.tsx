@@ -3,6 +3,7 @@ import currentProfile from "@/utils/current-profile";
 import {redirectToSignIn} from "@clerk/nextjs";
 import {db} from "@/lib/db";
 import {redirect} from "next/navigation";
+import Loader from "@/components/loaders/HashLoader";
 
 interface InviteCodePageProps {
     params: {
@@ -56,8 +57,9 @@ const InviteCodePage: NextPage<InviteCodePageProps> = async ({params}) => {
     }
 
     return (
-        <div>
-            Hello invite
+        <div className="flex items-center justify-center">
+            <h1>Hello, Invite Code!</h1>
+            <Loader size={50} color="#8b60a3" />
         </div>
     );
 };
