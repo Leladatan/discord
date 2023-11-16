@@ -47,7 +47,7 @@ const DeleteServerModal: FC = () => {
     return (
         <Dialog open={isOpenModal} onOpenChange={onClose}>
             <DialogContent
-                className="bg-neutral-800 text-white p-0 overflow-hidden overflow-y-auto scrollbar-thin h-full md:h-auto">
+                className="bg-neutral-300 text-black dark:bg-neutral-800 dark:text-white p-0 overflow-hidden overflow-y-auto scrollbar-thin h-full md:h-auto">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Delete Server

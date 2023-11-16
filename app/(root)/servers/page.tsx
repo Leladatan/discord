@@ -2,6 +2,13 @@ import {redirectToSignIn} from "@clerk/nextjs";
 import {db} from "@/lib/db";
 import currentProfile from "@/utils/current-profile";
 import ServersList from "@/app/(root)/servers/components/servers-list";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'List servers',
+    description: 'List servers',
+}
+
 
 const ServersPage = async () => {
     const profile = await currentProfile();

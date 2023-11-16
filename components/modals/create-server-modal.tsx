@@ -65,7 +65,7 @@ const CreateServerModal: FC = () => {
 
     return (
         <Dialog open={isOpenModal} onOpenChange={handleClose}>
-            <DialogContent className="bg-neutral-800 text-white p-0 overflow-hidden overflow-y-auto scrollbar-thin h-full md:h-auto">
+            <DialogContent className="bg-neutral-300 text-black dark:bg-neutral-800 dark:text-white p-0 overflow-hidden overflow-y-auto scrollbar-thin h-full md:h-auto">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Customize your server
@@ -136,7 +136,7 @@ const CreateServerModal: FC = () => {
                                         </FormLabel>
                                         <FormControl>
                                             <Input disabled={isSubmitting}
-                                                   className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-white
+                                                   className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black dark:text-white
                                                     focus-visible:ring-offset-0"
                                                    placeholder="Enter server name"
                                                    {...field}

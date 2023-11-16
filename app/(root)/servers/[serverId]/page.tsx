@@ -2,6 +2,32 @@ import {db} from "@/lib/db";
 import {redirect} from "next/navigation";
 import {auth, redirectToSignIn} from "@clerk/nextjs";
 import Image from "next/image";
+import {Metadata} from "next";
+
+type Props = {
+    params: {
+        serverId: string
+    }
+}
+
+
+export async function generateMetadata({params: {serverId}}: Props): Promise<Metadata> {
+    const server = await db.server.findFirst({
+        where: {
+            id: serverId
+        }
+    });
+
+    if (!server) {
+        return redirect("/servers");
+    }
+
+    return {
+        title: `${server.name}`,
+        description: `${server.name}`,
+    };
+}
+
 
 const ServerPage = async ({params}: {params: {serverId: string}}) => {
     const {userId} = auth();

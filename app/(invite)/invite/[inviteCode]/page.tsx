@@ -1,9 +1,15 @@
-import {NextPage} from "next";
+import {Metadata, NextPage} from "next";
 import currentProfile from "@/utils/current-profile";
 import {redirectToSignIn} from "@clerk/nextjs";
 import {db} from "@/lib/db";
 import {redirect} from "next/navigation";
 import Loader from "@/components/loaders/HashLoader";
+
+export const metadata: Metadata = {
+    title: 'Invite link discord',
+    description: 'Invite link discord',
+}
+
 
 interface InviteCodePageProps {
     params: {

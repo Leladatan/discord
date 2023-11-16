@@ -1,8 +1,13 @@
-import {NextPage} from "next";
+import {Metadata, NextPage} from "next";
 import {initialProfile} from "@/lib/initial-profile";
 import {db} from "@/lib/db";
 import {redirect} from "next/navigation";
 import InitialModal from "@/components/modals/initial-modal";
+
+export const metadata: Metadata = {
+    title: 'Setup server',
+    description: 'Setup server',
+}
 
 const SetupPage: NextPage = async () => {
     const profile = await initialProfile();

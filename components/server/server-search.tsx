@@ -21,7 +21,7 @@ interface ServerSearchProps {
             icon: React.ReactNode;
             name: string;
             id: string;
-        }[] | undefined
+        }[];
     }[],
 }
 
@@ -72,23 +72,26 @@ const ServerSearch: FC<ServerSearchProps> = ({data}) => {
             </button>
             <CommandDialog open={open} onOpenChange={setOpen}>
                 <CommandInput placeholder="Search all channels and members" />
-                <CommandList>
+                <CommandList className="py-5">
                     <CommandEmpty>
                         No results found
                     </CommandEmpty>
                     {data.map(({label, type, data}) => {
-                        if (!data?.length) return null;
-
                         return (
                             <CommandGroup key={label} heading={label}>
-                                {data.map(({id, icon, name}) => {
-                                    return (
-                                     <CommandItem key={id} onSelect={() => onSelect({id, type})}>
-                                         {icon}
-                                         <span>{name}</span>
-                                     </CommandItem>
-                                    )
-                                })}
+                                {!!data.length ?
+                                  data.map(({id, icon, name}) => {
+
+                                      return (
+                                        <CommandItem key={id} onSelect={() => onSelect({id, type})}>
+                                            {icon}
+                                            <span>{name}</span>
+                                        </CommandItem>
+                                      )
+                                  })
+                                :
+                                  <h3 className="mx-4">No results</h3>
+                                }
                             </CommandGroup>
                         )
                     })}
