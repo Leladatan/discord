@@ -2,7 +2,7 @@
 
 import qs from "query-string";
 import * as z from "zod";
-import {type FC} from 'react';
+import {type FC, useEffect} from 'react';
 import {
     Dialog,
     DialogContent,
@@ -29,17 +29,18 @@ const formSchema = z.object({
 });
 
 const CreateChannelModal: FC = () => {
-    const {isOpen, onClose, type} = useModal();
+    const {isOpen, onClose, type, data} = useModal();
     const router: AppRouterInstance = useRouter();
     const params = useParams();
 
     const isOpenModal: boolean = isOpen && type === "createChannel";
+    const {channelType} = data;
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
-            type: ChannelType.TEXT
+            type: channelType || ChannelType.TEXT,
         }
     });
 
@@ -67,6 +68,12 @@ const CreateChannelModal: FC = () => {
         form.reset();
         onClose();
     };
+
+    useEffect(() => {
+        if (channelType) {
+            form.setValue("type", channelType);
+        }
+    }, [channelType, form]);
 
     return (
         <Dialog open={isOpenModal} onOpenChange={handleClose}>
