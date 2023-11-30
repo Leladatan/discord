@@ -27,6 +27,9 @@ export async function generateMetadata({params: {serverId, memberId}}: Props): P
     },
     include: {
       members: {
+        where: {
+          id: memberId
+        },
         orderBy: {
           createdAt: "asc",
         },
@@ -59,6 +62,9 @@ const MemberIdPage = async ({params}: {params: {serverId: string, memberId: stri
     },
     include: {
       members: {
+        where: {
+          id: params.memberId
+        },
         orderBy: {
           createdAt: "asc",
         },

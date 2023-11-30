@@ -10,31 +10,41 @@ import DeleteServerModal from "@/components/modals/delete-server-modal";
 import CreateChannelModal from "@/components/modals/create-channel-modal";
 import EditChannelModal from "@/components/modals/edit-channel-modal";
 import DeleteChannelModal from "@/components/modals/delete-channel-modal";
+import {useModal} from "@/hooks/use-modal-store";
 
 const ModalProvider: FC = () => {
-    const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const {isOpen} = useModal();
 
-    useEffect((): void => {
-        setIsMounted(true);
-    }, []);
+  useEffect((): void => {
+    setIsMounted(true);
+  }, []);
 
-    if (!isMounted) {
-        return null;
+  useEffect((): void => {
+    if (isOpen) {
+      document.body.style.pointerEvents = "none";
     }
 
-    return (
-        <>
-            <CreateServerModal />
-            <InviteModal />
-            <EditServerModal />
-            <MembersModal />
-            <DeleteServerModal />
-            <LeaveServerModal />
-            <CreateChannelModal />
-            <EditChannelModal />
-            <DeleteChannelModal />
-        </>
-    );
+    document.body.style.pointerEvents = "";
+  }, [isOpen]);
+
+  if (!isMounted) {
+    return null;
+  }
+
+  return (
+    <>
+      <CreateServerModal/>
+      <InviteModal/>
+      <EditServerModal/>
+      <MembersModal/>
+      <DeleteServerModal/>
+      <LeaveServerModal/>
+      <CreateChannelModal/>
+      <EditChannelModal/>
+      <DeleteChannelModal/>
+    </>
+  );
 };
 
 export default ModalProvider;

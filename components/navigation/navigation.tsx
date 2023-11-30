@@ -38,7 +38,7 @@ const Navigation: FC = async () => {
       <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto"/>
       <ScrollArea className="flex-1 w-full">
         {servers.map(server => (
-          <NavigationItem key={server.id} id={server.id} imageUrl={server.imageUrl} name={server.name}/>
+          <NavigationItem key={server.id} id={server.id} server={server} imageUrl={server.imageUrl} name={server.name} />
         ))}
         <NavigationItemAction />
       </ScrollArea>
