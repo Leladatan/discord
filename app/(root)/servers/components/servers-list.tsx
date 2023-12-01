@@ -19,12 +19,12 @@ const ServersList: FC<ServersListProps> = ({servers}) => {
     return (
         <div className="grid grid-cols-6 gap-x-20 gap-y-30">
             {servers.map(server => (
-                <div key={server.id} className="flex flex-col justify-center items-center gap-2">
+                <div key={server.id} className="flex flex-col justify-between items-center gap-2">
                     <div className="w-[100px] h-[100px] relative">
                         <Image src={server.imageUrl} alt="Server image" fill
                                className="object-center object-cover rounded-full"/>
                     </div>
-                    <h2 className="font-bold truncate">
+                    <h2 className="w-[100px] font-bold line-clamp-2 break-words text-center">
                         {server.name}
                     </h2>
                     <Button

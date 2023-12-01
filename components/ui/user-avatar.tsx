@@ -1,10 +1,12 @@
 import {type FC} from 'react';
 import {Avatar, AvatarImage} from "@/components/ui/avatar";
-import {Profile} from "@prisma/client";
 import {cn} from "@/lib/utils";
 
 interface UserAvatarProps {
-    profile: Profile;
+    profile: {
+        imageUrl: string;
+        name: string;
+    };
     className?: string
 }
 

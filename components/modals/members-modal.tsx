@@ -93,22 +93,24 @@ const MembersModal: FC = () => {
 
     return (
         <Dialog open={isOpenModal} onOpenChange={onClose}>
-            <DialogContent className="bg-neutral-300 text-black dark:bg-neutral-800 dark:text-white overflow-hidden overflow-y-auto scrollbar-thin">
+            <DialogContent className="min-w-0 bg-neutral-300 text-black dark:bg-neutral-800 dark:text-white overflow-hidden overflow-y-auto scrollbar-thin">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Manage Members
                     </DialogTitle>
                 </DialogHeader>
-                <DialogDescription className="text-center text-zinc-500">
+                <DialogDescription className="text-center text-zinc-500 line-clamp-1">
                     {server.members.length} Members
                 </DialogDescription>
-                <ScrollArea className="mt-9 max-h-[420px] pr-6">
+                <ScrollArea className="mt-9 max-h-[420px] pr-2 xs:pr-6">
                     {server.members.map(member => (
                         <div key={member.id} className="flex items-center gap-x-2 mb-6">
                             <UserAvatar profile={member.profile}  />
                             <div className="fle flex-col gap-y-1">
                                 <div className="text-xs font-semibold flex items-center gap-x-1">
-                                    {member.profile.name}
+                                    <p className="w-[125px] md:w-[250px] line-clamp-1">
+                                        {member.profile.name}
+                                    </p>
                                     {roleIcon[member.role]}
                                 </div>
                             </div>

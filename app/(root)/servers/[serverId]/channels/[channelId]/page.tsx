@@ -2,8 +2,10 @@ import React from 'react';
 import {Metadata} from "next";
 import {db} from "@/lib/db";
 import {redirect} from "next/navigation";
-import {Server, Channel} from "@prisma/client";
-import Image from "next/image";
+import {Server, Channel, Member} from "@prisma/client";
+import currentProfile from "@/utils/current-profile";
+import {redirectToSignIn} from "@clerk/nextjs";
+import ChatHeader from "@/components/chat/chat-header";
 
 type Props = {
   params: {
@@ -49,38 +51,33 @@ export async function generateMetadata({params: {serverId, channelId}}: Props): 
 }
 
 const ChannelIdPage = async ({params}: { params: { serverId: string, channelId: string } }) => {
-  const server: PropsServer = await db.server.findUnique({
-    where: {
-      id: params.serverId,
-      channels: {
-        some: {
-          id: params.channelId
-        }
+  const profile = await currentProfile();
+
+  if (!profile) {
+    return redirectToSignIn();
+  }
+
+  const channel: Channel | null = await db.channel.findUnique({
+      where: {
+        id: params.channelId
       }
-    },
-    include: {
-      channels: {
-        where: {
-          id: params.channelId
-        },
-        orderBy: {
-          createdAt: "asc",
-        },
-      },
+  });
+
+  const member: Member | null = await db.member.findFirst({
+    where: {
+      serverId: params.serverId,
+      profileId: profile.id,
     }
   });
 
-  if (!server) {
-    return redirect("/servers");
+  if (!channel || !member) {
+    return redirect(`/servers/${params.serverId}`);
   }
 
   return (
-    <>
-      <div className="relative w-80 h-80">
-        <Image src={server.imageUrl} alt={"Server avatar"} fill/>
-      </div>
-      {server.channels[0].name}
-    </>
+    <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
+        <ChatHeader name={channel.name} serverId={params.serverId} type={"channel"} />
+    </div>
   );
 };
 
