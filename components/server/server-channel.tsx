@@ -40,6 +40,10 @@ const ServerChannel: FC<ServerChannelProps> = ({channel, server, role}) => {
     onOpen(type, data);
   };
 
+  if (!params) {
+    return null;
+  }
+
   return (
     <div
       onClick={onRedirectChannel}

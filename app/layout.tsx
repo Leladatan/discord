@@ -7,6 +7,8 @@ import ThemesProvider from "@/providers/theme-provider";
 import {cn} from "@/lib/utils";
 import { dark } from '@clerk/themes';
 import ModalProvider from "@/providers/modal-provider";
+import {SocketProvider} from "@/providers/socket-provider";
+import QueryProvider from "@/providers/query-provider";
 
 const nextFont: NextFont = Open_Sans({ subsets: ['latin'] });
 
@@ -26,10 +28,14 @@ export default function RootLayout({
     >
         <html lang="en">
         <ThemesProvider>
-            <body className={cn("transition-colors bg-white dark:bg-neutral-700", nextFont.className)}>
-            <ModalProvider />
-            {children}
-            </body>
+            <SocketProvider>
+              <body className={cn("transition-colors bg-white dark:bg-neutral-700", nextFont.className)}>
+              <ModalProvider />
+              <QueryProvider>
+                {children}
+              </QueryProvider>
+              </body>
+            </SocketProvider>
         </ThemesProvider>
         </html>
     </ClerkProvider>

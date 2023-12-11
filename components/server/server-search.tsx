@@ -42,6 +42,10 @@ const ServerSearch: FC<ServerSearchProps> = ({data}) => {
         return () => document.removeEventListener("keydown", down);
     }, []);
 
+    if (!params) {
+        return null;
+    }
+
     const onSelect = ({id, type}: {id: string, type: "channel" | "member"}): void => {
         setOpen(false);
 

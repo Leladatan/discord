@@ -32,6 +32,10 @@ const ServerMember: FC<ServerMemberProps> = ({member, server}) => {
     router.push(`/servers/${server.id}/members/${member.id}`)
   };
 
+  if (!params) {
+    return null;
+  }
+
   return (
     <HoverCard>
       <HoverCardTrigger asChild>

@@ -9,7 +9,7 @@ import {cn} from "@/lib/utils";
 
 const NavigationAction: FC = () => {
   const router: AppRouterInstance = useRouter();
-  const pathname: string = usePathname();
+  const pathname: string | null = usePathname();
 
   const onClick = (): void => {
     router.push("/servers");

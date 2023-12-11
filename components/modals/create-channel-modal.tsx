@@ -16,7 +16,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import axios from "axios";
-import {useParams, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
 import {useModal} from "@/hooks/use-modal-store";
 import {ChannelType} from "@prisma/client";
@@ -31,8 +31,8 @@ const formSchema = z.object({
 const CreateChannelModal: FC = () => {
     const {isOpen, onClose, type, data} = useModal();
     const router: AppRouterInstance = useRouter();
-    const params = useParams();
 
+    const {server} = data;
     const isOpenModal: boolean = isOpen && type === "createChannel";
     const {channelType} = data;
 
@@ -51,7 +51,7 @@ const CreateChannelModal: FC = () => {
             const url = qs.stringifyUrl({
                 url: "/api/channels",
                 query: {
-                    serverId: params.serverId
+                    serverId: server?.id
                 }
             })
             await axios.post(url, values);
