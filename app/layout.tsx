@@ -29,7 +29,7 @@ export default function RootLayout({
         <html lang="en">
         <ThemesProvider>
             <SocketProvider>
-              <body className={cn("transition-colors bg-white dark:bg-neutral-700", nextFont.className)}>
+              <body className={cn("transition-colors bg-white dark:bg-neutral-700 overflow-hidden overflow-y-auto scrollbar-thin", nextFont.className)}>
               <ModalProvider />
               <QueryProvider>
                 {children}

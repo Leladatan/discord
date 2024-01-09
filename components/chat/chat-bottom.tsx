@@ -58,6 +58,7 @@ const ChatBottom: FC<ChatBottomProps> = ({apiUrl, query, type, name}) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
+          disabled={isLoading}
           control={form.control}
           name={"content"}
           render={({field}) => (

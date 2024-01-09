@@ -77,9 +77,9 @@ const ChannelIdPage = async ({params}: { params: { serverId: string, channelId: 
   }
 
   return (
-    <div className="bg-white dark:bg-[#313338] flex flex-col justify-between h-full">
+    <div className="relative bg-white dark:bg-[#313338] flex flex-col justify-between h-full">
       <ChatHeader name={channel.name} serverId={params.serverId} type={"channel"}/>
-      <div className="flex flex-col justify-between flex-1">
+      <div className="flex flex-col justify-between flex-1 pb-6 bg-white dark:bg-[#313338]">
         <ChatMessages
           type={"channel"}
           chatId={channel.id}
@@ -94,7 +94,7 @@ const ChannelIdPage = async ({params}: { params: { serverId: string, channelId: 
             serverId: channel.serverId
           }}
         />
-        <div>
+        <div className="fixed bottom-0 rigth-0 bg-white dark:bg-[#313338] w-full md:w-7/12 lg:w-8/12">
           <ChatBottom
             name={channel.name}
             type={"channel"}

@@ -12,6 +12,7 @@ import EditChannelModal from "@/components/modals/edit-channel-modal";
 import DeleteChannelModal from "@/components/modals/delete-channel-modal";
 import {useModal} from "@/hooks/use-modal-store";
 import MessageFileModal from "@/components/modals/message-file-modal";
+import DeleteMessageModal from "@/components/modals/delete-message-modal";
 
 const ModalProvider: FC = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -45,6 +46,7 @@ const ModalProvider: FC = () => {
       <EditChannelModal/>
       <DeleteChannelModal/>
       <MessageFileModal/>
+      <DeleteMessageModal/>
     </>
   );
 };

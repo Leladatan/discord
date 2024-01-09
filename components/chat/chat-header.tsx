@@ -15,7 +15,7 @@ interface ChatHeaderProps {
 const ChatHeader: FC<ChatHeaderProps> = ({serverId, imageUrl, name, type}) => {
   return (
     <div
-      className="text-md font-semibold px-3 flex items-center gap-x-4 h-16 border-neutral-200 dark:border-neutral-800 border-b-2"
+      className="sticky top-0 left-0 bg-white dark:bg-[#313338] z-10 text-md font-semibold p-3 flex items-center gap-x-4 h-16 border-neutral-200 dark:border-neutral-800 border-b-2"
     >
       <MobileToggle serverId={serverId} />
       <div className={cn("flex items-center min-w-0", type === "channel" ? "gap-x-0" : "gap-x-3")}>
